@@ -43,6 +43,9 @@ httpServer.listen(port, async () => {
   console.log(`POPS is listening on ${host}:${port}`)
 })
 
+app.get('/', (req, res) => {
+  res.send('Back-end of POPS project')
+})
 app.use(express.json())
 app.use('/users', userRouters)
 app.use('/managers', managerRouters)
