@@ -1,12 +1,16 @@
 import { Request, Response, NextFunction } from 'express'
+import { ParamsDictionary } from 'express-serve-static-core'
+import { body } from 'express-validator'
 import { ProductStatus } from '~/constants/enums'
 import { SERVER_MESSAGES } from '~/constants/messages'
 import { SERVER_STATUS_CODE } from '~/constants/statuses'
+import { ErrorWithStatus } from '~/models/Errors'
+import { UpdateProductReqBody } from '~/models/requests/payments.requests'
 import { TokenPayload } from '~/models/requests/users.requests'
 import { Product } from '~/models/schemas/products.schema'
+import databaseService from '~/services/database.service'
 import { fileService } from '~/services/files.service'
 import { productService } from '~/services/products.service'
-
 export const getProductsController = async (req: Request, res: Response, next: NextFunction) => {
   const { role } = req.decoded_authorization as TokenPayload
   const { limit, page } = req.body
@@ -61,4 +65,23 @@ export const deleteProductController = async (req: Request, res: Response, next:
     return res.json({ message: 'Delete product failed' })
   }
   return res.status(SERVER_STATUS_CODE.OK).json({ message: 'Delete product successfully' })
+}
+//Request<ParamsDictionary, any, LoginReqBody>
+export const updateProductController = async (
+  req: Request<ParamsDictionary, any, UpdateProductReqBody>,
+  res: Response,
+  next: NextFunction
+) => {
+  const { product_id } = req.params
+  if (!product_id || product_id.length != 24) {
+    throw new ErrorWithStatus({
+      message: 'Product id is required',
+      status_code: SERVER_STATUS_CODE.UNPROCESSABLE_ENTITY
+    })
+  }
+
+  const { body } = req
+  console.log(req.body)
+  const result = await productService.updateProduct(product_id, body)
+  return res.json(result)
 }

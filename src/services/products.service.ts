@@ -3,6 +3,7 @@ import databaseService from './database.service'
 import { Product } from '~/models/schemas/products.schema'
 import { ObjectId } from 'mongodb'
 import { CartProduct } from '~/models/schemas/orders.schema'
+import { UpdateProductReqBody } from '~/models/requests/payments.requests'
 
 class ProductService {
   async getProducts(role: Role, limit: number, page: number) {
@@ -78,6 +79,26 @@ class ProductService {
     return result
   }
 
+  async updateProduct(product_id: string, payload: UpdateProductReqBody) {
+    console.log(payload)
+    const new_product = await databaseService.products.findOneAndUpdate(
+      {
+        _id: new ObjectId(product_id)
+      },
+      {
+        $set: {
+          ...payload
+        },
+        $currentDate: {
+          updated_at: true
+        }
+      },
+      {
+        returnDocument: 'after'
+      }
+    )
+    return new_product
+  }
   async deleteProduct(product_id: string) {
     const result = await databaseService.products.updateOne(
       { _id: new ObjectId(product_id) },

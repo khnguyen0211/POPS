@@ -1,5 +1,4 @@
 import { faker } from '@faker-js/faker'
-import { ObjectId } from 'mongodb'
 import { Brand, Category, PaymentMethod, PaymentStatus, ProductStatus } from '~/constants/enums'
 import { Customer } from '~/models/schemas/customers.schema'
 import { Product } from '~/models/schemas/products.schema'
@@ -386,7 +385,17 @@ export const productList: Product[] = [
     quantity: 13,
     status: ProductStatus.Available
   })
-]
+].map((p) => {
+  const price = randomNumber(500, 3000)
+  return {
+    ...p,
+    import_price: price,
+    retail_price: Math.ceil(price * 1.24),
+    quantity: randomNumber(50, 200),
+    brand: randomNumber(0, 8),
+    category: randomNumber(0, 2)
+  }
+})
 
 const faker_product = () => {
   const faker_products: Product[] = []
@@ -528,4 +537,8 @@ export const generate_days = (from: string, to: string) => {
   console.log(days)
   return days
   console.log(to_date.toString())
+}
+
+function randomNumber(a: number, b: number) {
+  return Math.floor(Math.random() * (b - a + 1)) + a
 }
