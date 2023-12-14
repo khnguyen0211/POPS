@@ -14,7 +14,8 @@ class CustomerService {
 
   async addCustomer(customer: Customer) {
     const result = await databaseService.customers.insertOne(customer)
-    return result
+    const newCustomer = await databaseService.customers.findOne({ _id: result.insertedId })
+    return newCustomer
   }
 
   async getCustomerList() {

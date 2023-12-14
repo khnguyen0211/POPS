@@ -13,7 +13,7 @@ export const addCustomerController = async (req: Request, res: Response) => {
   const { full_name, phone_number, address } = req.body
   const customer = new Customer({ full_name, phone_number, address })
   const result = await customerService.addCustomer(customer)
-  res.json(result)
+  return res.json(result)
 }
 
 export const getCustomerListController = async (req: Request, res: Response) => {

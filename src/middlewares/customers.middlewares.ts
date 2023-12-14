@@ -8,7 +8,7 @@ import { validate } from '~/utils/validation'
 export const customerValidator = validate(
   checkSchema(
     {
-      customer_name: {
+      full_name: {
         notEmpty: {
           errorMessage: 'Customer name is required'
         }
