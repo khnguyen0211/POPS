@@ -53,13 +53,10 @@ class ConversationService {
           friend_id_set.add(con.receiver_id.toString())
           allConversation.push(con)
         })
-        // console.log(day, conversations)
         return conversations
       })
     )
 
-    console.log(allConversation)
-    console.log(friend_id_set.size)
     friend_id_set.delete(user_id)
     allConversation.forEach((con) => {
       if (friend_id_set.size != 0) {

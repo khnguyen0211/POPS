@@ -105,10 +105,8 @@ export const initialSocket = (httpServer: ServerHttp) => {
       if (users[data.to]) {
         const receiver_socket_id = users[data.to].socket_id
         socket.to(receiver_socket_id).emit('user_calling', conversation)
-        console.log('user_calling event')
       } else {
         socket.emit('user_offline', conversation)
-        console.log('user_offline event')
       }
     })
 
@@ -127,7 +125,6 @@ export const initialSocket = (httpServer: ServerHttp) => {
         }
         return { id, status: 'Offline' }
       })
-      console.log(result)
       socket.emit('result_status_friends_list', result)
     })
     socket.on('disconnect', () => {

@@ -48,7 +48,6 @@ export const productValidator = validate(
       },
       custom: {
         options: (value) => {
-          console.log(value)
           if (value < 0 && value > 1) {
             throw new ErrorWithStatus({
               message: 'Profit is invalid, it should be 0% - 100%',
@@ -66,7 +65,6 @@ export const productValidator = validate(
       isNumeric: true,
       custom: {
         options: (value) => {
-          console.log(value)
           if (value < 0 || value > 2) {
             throw new ErrorWithStatus({
               message: "Product's category should be between 0 and 2",

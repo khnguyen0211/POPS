@@ -8,7 +8,6 @@ import { ErrorWithStatus } from '~/models/Errors'
 import { UpdateProductReqBody } from '~/models/requests/payments.requests'
 import { TokenPayload } from '~/models/requests/users.requests'
 import { Product } from '~/models/schemas/products.schema'
-import databaseService from '~/services/database.service'
 import { fileService } from '~/services/files.service'
 import { productService } from '~/services/products.service'
 export const getProductsController = async (req: Request, res: Response, next: NextFunction) => {
@@ -62,7 +61,7 @@ export const deleteProductController = async (req: Request, res: Response, next:
   }
   const result = await productService.deleteProduct(product_id)
   if (result.matchedCount === 0 || result.acknowledged == false) {
-    return res.json({ message: 'Delete product failed' })
+    return res.json({ message: 'Cannot delete this product' })
   }
   return res.status(SERVER_STATUS_CODE.OK).json({ message: 'Delete product successfully' })
 }
@@ -81,7 +80,6 @@ export const updateProductController = async (
   }
 
   const { body } = req
-  console.log(req.body)
   const result = await productService.updateProduct(product_id, body)
   return res.json(result)
 }

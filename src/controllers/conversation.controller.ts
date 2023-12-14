@@ -5,7 +5,6 @@ import { conversationService } from '~/services/conversations.service'
 export const getConversationController = async (req: Request, res: Response) => {
   const { receiver_id } = req.params
   const sender_id = req.decoded_authorization?.user_id as string
-  console.log({ receiver_id, sender_id })
   const conversation = await conversationService.getConversation({ sender_id, receiver_id })
   return res.json(conversation)
 }
