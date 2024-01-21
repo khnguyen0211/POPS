@@ -14,7 +14,7 @@ import { env_config } from '~/constants/config'
 export const initialSocket = (httpServer: ServerHttp) => {
   const io = new Server(httpServer, {
     cors: {
-      origin: ['http://localhost:3000', 'http://localhost:3001']
+      origin: ['https://pops.onrender.com', 'http://localhost:3001']
     }
   })
 

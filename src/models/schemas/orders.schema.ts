@@ -30,7 +30,7 @@ type OrderType = {
   customer: ObjectId
   product_list: CartProduct[]
   voucher?: string
-  total_order?: number //chưa tính thuế & giảm giá từ voucher.
+  total_order?: number
   total_bill: number
   payment_method: PaymentMethod
   payment_status: PaymentStatus

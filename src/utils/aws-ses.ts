@@ -73,6 +73,6 @@ export const sendVerifyEmail = (
   return sendEmail(
     toAddress,
     'Verify your email',
-    template.replace('{{verify_email_url}}', `http://localhost:3000/email-verifications/${email_verify_token}`)
+    template.replace('{{verify_email_url}}', `https://pops.onrender.com/email-verifications/${email_verify_token}`)
   )
 }

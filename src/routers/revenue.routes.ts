@@ -6,13 +6,13 @@ import { generate_days, generate_week } from '~/utils/generate_data'
 
 const revenueRouters = Router()
 
-revenueRouters.get('/revenue', async (req, res, next) => {
+revenueRouters.post('/revenue', async (req, res, next) => {
   const { from, to } = req.body
   let days = []
   if (!from && !to) {
     days = generate_week(true)
   } else {
-    days = generate_days(from, to)
+    days = generate_days(from, to, true)
   }
 
   const revenues = await paymentService.getRevenue({ days })
@@ -27,7 +27,7 @@ revenueRouters.get('/revenue', async (req, res, next) => {
   return res.json({ days, revenue_list, total_order_list, product_quantity_list })
 })
 
-revenueRouters.get('/order-list', async (req, res, next) => {
+revenueRouters.post('/order-list', async (req, res, next) => {
   const { from, to } = req.body
   let days = []
   if (!from && !to) {

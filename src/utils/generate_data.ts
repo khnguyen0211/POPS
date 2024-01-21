@@ -422,7 +422,7 @@ const faker_product = () => {
 
 const generateCustomerList = (): Customer[] => {
   const customer_list: Customer[] = []
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 10; i++) {
     const customer = new Customer({
       full_name: faker.person.fullName(),
       phone_number: generatePhoneNumber(),
@@ -434,11 +434,7 @@ const generateCustomerList = (): Customer[] => {
 }
 
 const generatePhoneNumber = () => {
-  const numbers = Array.from(Array(10), (_, i) => Math.floor(Math.random() * 10))
-  let phoneNumber = '0' + numbers.slice(0, 3).join('') + '.'
-  phoneNumber += numbers.slice(3, 6).join('') + '.'
-  phoneNumber += numbers.slice(6, 9).join('')
-  return phoneNumber
+  return `0${randomNumber(100000000, 999999999)}`
 }
 
 export const generateBillCode = async () => {
@@ -525,7 +521,7 @@ export const generate_week = (increase?: boolean) => {
   return days
 }
 
-export const generate_days = (from: string, to: string) => {
+export const generate_days = (from: string, to: string, increase?: boolean) => {
   const days: string[] = []
   const [from_year, from_moth, from_day] = from.split('-')
   const [to_year, to_moth, to_day] = to.split('-')
@@ -534,9 +530,10 @@ export const generate_days = (from: string, to: string) => {
   for (let i = to_date; i >= from_date; i = i.minus({ days: 1 })) {
     days.push(i.toISODate() as string)
   }
-  console.log(days)
+  if (increase) {
+    days.reverse()
+  }
   return days
-  console.log(to_date.toString())
 }
 
 function randomNumber(a: number, b: number) {

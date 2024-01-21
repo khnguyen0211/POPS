@@ -26,7 +26,7 @@ const corsOptions: CorsOptions = {
 const app = express()
 const httpServer = createServer(app)
 app.use(cors(corsOptions))
-app.use(helmet())
+//app.use(helmet())
 databaseService.connect().then(() => {
   databaseService.indexUsers()
   databaseService.indexProduct()

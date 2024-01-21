@@ -20,6 +20,7 @@ export const productValidator = validate(
     description: {
       optional: true
     },
+    //number 0-9
     brand: {
       notEmpty: {
         errorMessage: 'Brand is required'
@@ -58,6 +59,7 @@ export const productValidator = validate(
         }
       }
     },
+    //number 0-2
     category: {
       notEmpty: {
         errorMessage: 'Category is required'
