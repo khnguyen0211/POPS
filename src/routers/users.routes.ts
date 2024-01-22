@@ -87,6 +87,9 @@ const getGoogleUser = async ({ id_token, access_token }: { id_token: string; acc
 }
 
 const getOAuthGoogleToken = async (code: string) => {
+  if (!code) {
+    return 0
+  }
   const body = {
     code,
     client_id: '851921911617-n07b8va3mj79k1i4du5eo9t8nkt1mgcp.apps.googleusercontent.com',

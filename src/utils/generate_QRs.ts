@@ -11,8 +11,12 @@ export const createQR = (url: string) => {
       if (error) {
         return reject(error)
       } else {
-        const qr_code = `${env_config.host}:${env_config.port}/static/paypal/${qr_id.toString()}.jpg`
-        return resolve(qr_code)
+        if (env_config.host == 'https://pops-backend') {
+          const qr_code1 = `${env_config.host}/static/paypal/${qr_id.toString()}.jpg`
+          return resolve(qr_code1)
+        }
+        const qr_code2 = `${env_config.host}:${env_config.port}/static/paypal/${qr_id.toString()}.jpg`
+        return resolve(qr_code2)
       }
     })
   })
