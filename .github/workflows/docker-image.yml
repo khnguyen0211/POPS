@@ -11,6 +11,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    - name: 'Create env file'
+      run: echo "${{ secrets.TWITTER_ENV_PRODUCTION }}" > .env.production
 
     steps:
     - uses: actions/checkout@v3
