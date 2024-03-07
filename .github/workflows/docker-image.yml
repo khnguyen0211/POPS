@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: "Create env file"
-        run: echo "${{ secrets.ENV_DEVELOPMENT }}" > .env.production
+        run: echo "${{ secrets.ENV_DEVELOPMENT }}" > .env.development
       - name: Build the Docker image
         run: docker build --progress=plain -t pops/pops:v2 .
       - name: Log in to Docker Hub
