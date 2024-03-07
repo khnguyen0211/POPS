@@ -8,7 +8,6 @@ COPY tsconfig.json .
 COPY ecosystem.config.js .
 COPY .env.production .
 COPY ./src ./src
-COPY ./openapi ./openapi
 
 RUN apk update && apk add bash
 RUN apk add --no-cache ffmpeg
