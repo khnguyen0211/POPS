@@ -5,7 +5,6 @@ import { RefreshToken } from '~/models/schemas/refresh_tokens.schema'
 import { ObjectId } from 'mongodb'
 import { User } from '~/models/schemas/users.schema'
 import { hashPassword } from '~/utils/crypto'
-import { Invoice } from '~/models/schemas/invoice.schema'
 import { env_config } from '~/constants/config'
 
 class UserService {

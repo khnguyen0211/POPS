@@ -53,7 +53,7 @@ userRouters.get('/oauth/google', async (req, res) => {
     avatar: googleUser.picture
   }
   const queryString = new URLSearchParams(result).toString()
-  const url = `https://pops.onrender.com/?${queryString}`
+  const url = `http://localhost:3000/?${queryString}`
   return res.redirect(url)
 })
 userRouters.get('/get-friend/:id', async (req, res, next) => {

@@ -1,0 +1,8 @@
+version: '3'
+services:
+  pops:
+    image: pops/pops:v1
+    ports:
+      - '4000:4000'
+    volumes:
+      - '~C:\Users\84961\Desktop\POPS-API\uploads:/app/uploads'

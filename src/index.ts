@@ -12,12 +12,10 @@ import productRouters from './routers/products.routes'
 import paymentRouters from './routers/payments.routes'
 import customerRouters from './routers/customer.routes'
 import searchRouters from './routers/search.routes'
-import historyRouters from './routers/history.routes'
 import revenueRouters from './routers/revenue.routes'
 import { createServer } from 'http'
 import chatRouters from './routers/conversation.routes'
 import { initialSocket } from './utils/socket'
-import helmet from 'helmet'
 import { env_config } from './constants/config'
 
 const corsOptions: CorsOptions = {
@@ -39,7 +37,8 @@ initialData()
 
 const port = env_config.port
 const host = env_config.host
-httpServer.listen(port, async () => {
+httpServer.listen(port, () => {
+  console.log(env_config.host)
   console.log(`POPS is listening on ${host}:${port}`)
 })
 
@@ -55,7 +54,6 @@ app.use('/static', staticRouters)
 app.use('/payments', paymentRouters)
 app.use('/customers', customerRouters)
 app.use('/search', searchRouters)
-app.use('/history', historyRouters)
 app.use('/revenue', revenueRouters)
 app.use('/chat', chatRouters)
 app.use(defaultErrorHandler)

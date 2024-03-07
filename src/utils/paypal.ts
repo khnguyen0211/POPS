@@ -17,8 +17,8 @@ export const paypal_util = (productCart: Item[], order_id: string, discount: num
       payment_method: 'paypal'
     },
     redirect_urls: {
-      return_url: `https://pops.onrender.com/payments/paypal-success/${order_id}`,
-      cancel_url: `https://pops.onrender.com/payments/paypal-failed/${order_id}`
+      return_url: `http://localhost:3000/payments/paypal-success/${order_id}`,
+      cancel_url: `http://localhost:3000/payments/paypal-failed/${order_id}`
     },
     transactions: [
       {
