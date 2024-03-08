@@ -15,8 +15,8 @@ jobs:
       - name: Create env file
         run: echo "${{ secrets.ENV_DEVELOPMENT }}" > .env.development
       - name: Build the Docker image
-        run: docker build --progress=plain -t pops/pops:v2 .
+        run: docker build --progress=plain -t khoinguyen0211/pops_demo:tagname .
       - name: Log in to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
       - name: Push the Docker image
-        run: docker push pops/pops:v2
+        run: docker push khoinguyen0211/pops_demo:tagname
