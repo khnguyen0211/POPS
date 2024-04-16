@@ -38,6 +38,8 @@ initialData()
 const port = env_config.port
 const host = env_config.host
 httpServer.listen(port, () => {
+  let s = 'Viet nam ' + 58 + ' ahihih'
+  console.log(s)
   console.log(env_config.host)
   console.log(`POPS is listening on ${host}:${port}`)
 })
