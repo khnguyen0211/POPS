@@ -24,7 +24,11 @@ import { User } from '~/models/schemas/users.schema'
 export const payByCashController = async (
   req: Request<ParamsDictionary, any, PayByCashReqBody>,
   res: Response,
+<<<<<<< HEAD
   _next: NextFunction
+=======
+  next: NextFunction
+>>>>>>> f638367a30a07ca8ecfe48801352abf454c98f8d
 ) => {
   const { user_id } = req.decoded_authorization as TokenPayload
   const { customer_id, voucher, money_given } = req.body
