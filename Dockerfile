@@ -4,7 +4,7 @@ COPY package.json .
 COPY package-lock.json .
 COPY tsconfig.json .
 COPY ecosystem.config.js .
-COPY .env.development .
+COPY .env.production .
 COPY ./src ./src
 
 RUN apk update && apk add bash
