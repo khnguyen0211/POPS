@@ -37,9 +37,9 @@ initialData()
 
 const port = env_config.port
 const host = env_config.host
-
+const env = process.env.NODE_ENV
 httpServer.listen(port, () => {
-  console.log(`POPS is listening on ${host}:${port}`)
+  console.log(`POPS is listening on ${host}:${port} on: ` + env)
 })
 
 app.get('/', (req, res) => {
