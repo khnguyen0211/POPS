@@ -17,4 +17,8 @@ jobs:
     - name: 'Get .env file from Github'
       run: echo "${{secrets.ENV_PRODUCTION}}" > .env.production
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file Dockerfile --tag khoinguyen0211/pops:v1
+    - name: 'Log in to DockerHub'
+      run: docker login -u ${{secrets.DOCKER_HUB_USERNAME}} -p ${{secrets.DOCKER_HUB_PASSWORD}}
+    - name: 'Push my image to DockerHub' 
+      run: docker push khoinguyen0211/pops:v1
