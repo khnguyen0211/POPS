@@ -2,23 +2,38 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ['master']
   pull_request:
-    branches: [ "master" ]
+    branches: ['master']
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: 'Get .env file from Github'
-      run: echo "${{secrets.ENV_PRODUCTION}}" > .env.production
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag khoinguyen0211/pops:v1
-    - name: 'Log in to DockerHub'
-      run: docker login -u ${{secrets.DOCKER_HUB_USERNAME}} -p ${{secrets.DOCKER_HUB_PASSWORD}}
-    - name: 'Push my image to DockerHub' 
-      run: docker push khoinguyen0211/pops:v1
+      - uses: actions/checkout@v4
+      - name: 'Get .env.production file from Github'
+        run: echo "${{secrets.ENV_PRODUCTION}}" > .env.production
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag khoinguyen0211/pops:v1
+      - name: 'Log in to DockerHub'
+        run: docker login -u ${{secrets.DOCKER_HUB_USERNAME}} -p ${{secrets.DOCKER_HUB_PASSWORD}}
+      - name: 'Push my image to DockerHub'
+        run: docker push khoinguyen0211/pops:v1
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: ${{ secrets.VPS_PORT }}
+          script: |
+            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+            docker pull khoinguyen0211/pops:v1
+            docker stop pops
+            docker rm pops
+            docker run -dp 5001:5000 --name pops --restart unless-stopped -v ${{ github.workspace }}/uploads:/app/uploads khoinguyen0211/pops:v1

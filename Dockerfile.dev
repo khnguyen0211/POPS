@@ -1,7 +1,6 @@
 FROM node:20.11.1-alpine3.18
 WORKDIR /app
-COPY package.json .
-COPY package-lock.json .
+COPY package.* .
 COPY tsconfig.json .
 COPY ecosystem.config.js .
 COPY .env.development .
